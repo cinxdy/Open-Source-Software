@@ -1,0 +1,21 @@
+CC = gcc
+CFLAGS = -W -Wall
+TARGET = shop
+D_OBJECTS = menu_d.o guest_d.o main_d.o
+OBJECTS = menu.o guest.o main.o
+all : $(TARGET)
+
+$(TARGET) : $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $^
+shop_d : $(D_OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+menu_d.o : menu.c
+	$(CC) -DDEBUG_MODE -c $(CFLAGS) -o $@ $^
+guest_d.o : guest.c
+	$(CC) -DDEBUG_MODE -c  $(CFLAGS) -o $@ $^
+main_d.o : main.c
+	$(CC) -DDEBUG_MODE -c $(CFLAGS) -o $@ $^
+
+clean :
+	rm *.o $(TARGET) $(D_TARGET)
